@@ -1,8 +1,35 @@
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { FormEvent, useState } from "react";
 import InputGroup from "../components/InputGroup";
 
-const register = () => {
+const Register = () => {
+	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [errors, setErrors] = useState<any>({});
+
+	let router = useRouter();
+
+	const handleSubmit = async (event: FormEvent) => {
+		event.preventDefault();
+		try {
+			// 백엔드에 회원가입을 위한 요청 및 회원가입 후 로그인 페이지로 자동 이동
+			const res = await axios.post("/auth/register", {
+				email,
+				password,
+				username,
+			});
+			console.log(res);
+			router.push("/login");
+		} catch (error: any) {
+			// 에러 시 백엔드에서 전해오는 에러 error STATE에 저장
+			console.log("error", error);
+			setErrors(error.response.data || {});
+		}
+	};
+
 	return (
 		<div className="bg-white">
 			<div className="flex flex-col items-center justify-center h-screen p-6">
@@ -16,8 +43,8 @@ const register = () => {
 					</form>
 					<small>
 						이미 가입하셨나요?
-						<Link href="/login">
-							<a className="ml-1 text-blue-500 uppercase">로그인</a>
+						<Link href="/login" className="ml-1 text-blue-500 uppercase">
+							로그인
 						</Link>
 					</small>
 				</div>
@@ -26,4 +53,4 @@ const register = () => {
 	);
 };
 
-export default register;
+export default Register;
