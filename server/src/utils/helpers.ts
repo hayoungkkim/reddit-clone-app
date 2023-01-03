@@ -17,7 +17,7 @@ export const slugify = function (str: string) {
 	return str;
 };
 
-export function makeid(length: number) {
+export function makeId(length: number) {
 	var result = "";
 	var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	var charactersLength = characters.length;
