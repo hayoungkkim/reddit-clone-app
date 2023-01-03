@@ -1,5 +1,7 @@
 import { Exclude, Expose } from "class-transformer";
-import { BaseEntity, BeforeInsert, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { BeforeInsert, Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { makeid, slugify } from "../utils/helpers";
+import BaseEntity from "./Entity";
 
 @Entity("posts")
 export default class Post extends BaseEntity {

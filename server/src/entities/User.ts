@@ -1,7 +1,8 @@
 import { Exclude } from "class-transformer";
 import { IsEmail, Length } from "class-validator";
-import { Entity, Column, BaseEntity, Index, OneToMany, BeforeInsert } from "typeorm";
+import { Entity, Column, Index, OneToMany, BeforeInsert } from "typeorm";
 import bcrypt from "bcryptjs";
+import BaseEntity from "./Entity";
 
 @Entity("users")
 export default class User extends BaseEntity {
