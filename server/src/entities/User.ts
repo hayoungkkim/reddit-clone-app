@@ -1,6 +1,7 @@
 import { Exclude } from "class-transformer";
 import { IsEmail, Length } from "class-validator";
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index, OneToMany, BeforeInsert } from "typeorm";
+import { Entity, Column, BaseEntity, Index, OneToMany, BeforeInsert } from "typeorm";
+import bcrypt from "bcryptjs";
 
 @Entity("users")
 export default class User extends BaseEntity {
@@ -20,6 +21,9 @@ export default class User extends BaseEntity {
 	@Length(6, 255, { message: "비밀번호는 6자 이상이어야 합니다." })
 	password: string;
 
+	// 관계 형성
+	// Post :: 타입지정, post.user :: post 컬럼 안에 엔티티 지정
+	// 한 명의 유저가 많은 글을 올릴 수 있고 투표도 할 수 있어서 OneToMany
 	@OneToMany(() => Post, (post) => post.user)
 	posts: Post[];
 
