@@ -26,7 +26,7 @@ const Register = () => {
 		} catch (error: any) {
 			// 에러 시 백엔드에서 전해오는 에러 error STATE에 저장
 			console.log("error", error);
-			setErrors(error.response.data || {});
+			setErrors(error.response?.data || {});
 		}
 	};
 
