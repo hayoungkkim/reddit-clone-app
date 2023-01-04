@@ -3,11 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 import InputGroup from "../components/InputGroup";
+import { useAuthDispatch } from "../context/auth";
 
 const Register = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState<any>({});
+	const dispatch = useAuthDispatch();
 
 	let router = useRouter();
 
@@ -15,6 +17,13 @@ const Register = () => {
 		event.preventDefault();
 		try {
 			const res = await axios.post("/auth/login", { password, username }, { withCredentials: true });
+
+			// 백엔드에서 보내준 유저 정보를 다른 컴포넌트에서도 사용하고 싶다 !!!
+			// 그래서 Context에 보관해주자 !!!
+			dispatch("LOGIN", res.data?.user);
+
+			// 로그인 후 메인 페이지로 이동
+			router.push("/");
 		} catch (error: any) {
 			console.log("error", error);
 			setErrors(error.response?.data || {});
