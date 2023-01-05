@@ -14,6 +14,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 		// 토큰에서 나온 유저 이름을 이용해서 유저 정보 데이터베이스에서 가져오기
 		const user = await User.findOneBy({ username });
 
+		if (!user) throw new Error("Unauthenticated");
+
 		// 유저 정보를 res.locals.user에 넣어주기
 		res.locals.user = user;
 	} catch (error) {
