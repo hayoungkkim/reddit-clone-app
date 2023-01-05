@@ -1,20 +1,9 @@
 import { NextFunction, Request, Response, Router } from "express";
-import User from "../entities/User";
-import jwt from "jsonwebtoken";
+import userMiddleware from "../middlewares/user";
+import authMiddleware from "../middlewares/auth";
 
 const createSub = async (req: Request, res: Response, next: NextFunction) => {
 	const { name, title, description } = req.body;
-
-	// 먼저 Sub을 생성할 수 있는 유저인지 체크를 위해 유저 정보 가져오기 (요청에서 보내주는 토큰을 이용)
-	const token = req.cookies.token;
-	if (!token) return next();
-
-	const { username }: any = jwt.verify(token, process.env.JWT_SECRET!);
-
-	const user = await User.findOneBy({ username });
-
-	// 유저 정보가 없다면 throw error!
-	if (!user) throw new Error("Unauthenticated");
 
 	// 유저 정보가 있다면 sub 이름과 제목이 이미 있는 것인지 체크
 
@@ -25,6 +14,6 @@ const createSub = async (req: Request, res: Response, next: NextFunction) => {
 
 const router = Router();
 
-router.post("/", createSub);
+router.post("/", userMiddleware, authMiddleware, createSub);
 
 export default router;

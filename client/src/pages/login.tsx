@@ -5,7 +5,7 @@ import React, { FormEvent, useState } from "react";
 import InputGroup from "../components/InputGroup";
 import { useAuthDispatch } from "../context/auth";
 
-const Register = () => {
+const Login = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState<any>({});
@@ -52,4 +52,4 @@ const Register = () => {
 	);
 };
 
-export default Register;
+export default Login;
