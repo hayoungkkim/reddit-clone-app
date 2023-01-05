@@ -4,7 +4,7 @@ import BaseEntity from "./Entity";
 import Post from "./Post";
 import User from "./User";
 
-@Entity("users")
+@Entity("subs")
 export default class Sub extends BaseEntity {
 	@Index()
 	@Column({ unique: true })
@@ -22,7 +22,7 @@ export default class Sub extends BaseEntity {
 	@Column({ nullable: true })
 	bannerUrn: string;
 
-	@Column({ nullable: true })
+	@Column()
 	username: string;
 
 	@ManyToOne(() => User)

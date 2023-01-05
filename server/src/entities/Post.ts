@@ -11,7 +11,7 @@ import Vote from "./Vote";
 export default class Post extends BaseEntity {
 	@Index()
 	@Column()
-	identifier: String; // 7 Character Id
+	identifier: string; // 7 Character Id
 
 	@Column()
 	title: string;
