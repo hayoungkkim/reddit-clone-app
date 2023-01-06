@@ -4,6 +4,7 @@ import { AppDataSource } from "./data-source";
 
 import authRoutes from "./routes/auth";
 import subRoutes from "./routes/subs";
+import postRoutes from "./routes/posts";
 
 import cors from "cors";
 import dotenv from "dotenv";
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.get("/", (_, res) => res.send("running"));
 app.use("/api/auth", authRoutes);
 app.use("/api/subs", subRoutes);
+app.use("/api/posts", postRoutes);
 
 // static 파일이 public 폴더 안에 있고 브라우저로 접근할 때 제공 할 수 있게 해줌
 app.use(express.static("public"));
