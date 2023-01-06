@@ -48,6 +48,8 @@ const PostPage = () => {
 				commentIdentifier: comment?.identifier,
 				value,
 			});
+			postMutate();
+			commentMutate();
 		} catch (error) {
 			console.log(error);
 		}
