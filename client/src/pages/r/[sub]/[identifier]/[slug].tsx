@@ -5,16 +5,17 @@ import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import useSWR from "swr";
 import { useAuthState } from "../../../../context/auth";
-import { Post } from "../../../../types";
+import { Comment, Post } from "../../../../types";
 
 const PostPage = () => {
 	const router = useRouter();
 	const { identifier, sub, slug } = router.query;
 	const { authenticated, user } = useAuthState();
 	const [newComment, setNewComment] = useState("");
-
 	const { data: post, error } = useSWR<Post>(identifier && slug ? `/posts/${identifier}/${slug}` : null);
+	const { data: comments } = useSWR<Comment[]>(identifier && slug ? `/posts/${identifier}/${slug}/comments` : null);
 
+	console.log("comment", comments);
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 		if (newComment.trim() === "") {
@@ -91,6 +92,26 @@ const PostPage = () => {
 									</div>
 								)}
 							</div>
+							{/* 댓글 리스트 부분 */}
+							{comments?.map((comment) => (
+								<div className="flex" key={comment.identifier}>
+									<div className="py-2 pr-2">
+										<p className="mb-1 text-xs leading-none">
+											<Link href={`/u/${comment.username}`} className="mr-1 font-bold hover:underline">
+												{comment.username}
+											</Link>
+											<span className="text-gray-600">
+												{`
+													${comment.voteScore}
+													posts
+													${dayjs(comment.createdAt).format("YYYY-MM-DD HH:mm")}
+												`}
+											</span>
+										</p>
+										<p>{comment.body}</p>
+									</div>
+								</div>
+							))}
 						</>
 					)}
 				</div>
