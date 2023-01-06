@@ -13,9 +13,8 @@ const PostPage = () => {
 	const { authenticated, user } = useAuthState();
 	const [newComment, setNewComment] = useState("");
 	const { data: post, error } = useSWR<Post>(identifier && slug ? `/posts/${identifier}/${slug}` : null);
-	const { data: comments } = useSWR<Comment[]>(identifier && slug ? `/posts/${identifier}/${slug}/comments` : null);
+	const { data: comments, mutate: commentMutate } = useSWR<Comment[]>(identifier && slug ? `/posts/${identifier}/${slug}/comments` : null);
 
-	console.log("comment", comments);
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 		if (newComment.trim() === "") {
@@ -26,7 +25,7 @@ const PostPage = () => {
 			await axios.post(`/posts/${post?.identifier}/${post?.slug}/comments`, {
 				body: newComment,
 			});
-
+			commentMutate();
 			setNewComment("");
 		} catch (error) {
 			console.log(error);
