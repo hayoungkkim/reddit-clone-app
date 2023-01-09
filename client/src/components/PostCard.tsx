@@ -56,14 +56,14 @@ const PostCard = ({ post: { identifier, slug, title, body, subName, createdAt, v
 							<Link href={`/r/${subName}`}>
 								<Image src={sub!.imageUrl} alt="sub" className="rounded-full cursor-pointer" width={12} height={12} />
 							</Link>
-							<Link href={`/r/${subName}`} className="text-xs font-bold cursor-pointer hover:underline">
+							<Link href={`/r/${subName}`} className="ml-2 text-xs font-bold cursor-pointer hover:underline">
 								/r/{subName}
 							</Link>
 							<span className="mx-1 text-xs text-gray-400">•</span>
 						</div>
 					)}
 					<p className="text-xs text-gray-400">
-						Posted by <i className="fas fa-abacus"></i>
+						Posted by
 						<Link href={`/u/${username}`} className="mx-1 hover:underline">
 							/u/{username}
 						</Link>
@@ -75,7 +75,7 @@ const PostCard = ({ post: { identifier, slug, title, body, subName, createdAt, v
 				<Link href={url} className="my-1 text-lg font-medium">
 					{title}
 				</Link>
-				{body && <p className="my-3 text-sm">{body}</p>}
+				{body && <p className="my-1 text-sm">{body}</p>}
 				<div className="flex">
 					<Link href={url}>
 						<i className="mr-1 fas fa-comment-alt fa-xs"></i>

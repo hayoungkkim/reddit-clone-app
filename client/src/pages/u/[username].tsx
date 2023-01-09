@@ -32,12 +32,12 @@ const UserPage = () => {
 									<p className="mb-2 text-xs text-gray-500">
 										<Link href={`/u/${comment.username}`} className="cursor-pointer hover:underline">
 											{comment.username}
-										</Link>
-										<span>commented on</span>
-										<Link href={`/u/${comment.post?.url}`} className="font-semibold cursor-pointer hover:underline">
+										</Link>{" "}
+										<span>commented on</span>{" "}
+										<Link href={`/u${comment.post?.url}}`} className="font-semibold cursor-pointer hover:underline">
 											{comment.post?.title}
-										</Link>
-										<span>•</span>
+										</Link>{" "}
+										<span>•</span>{" "}
 										<Link href={`/u/${comment.post?.subName}`} className="text-black cursor-pointer hover:underline">
 											/r/{comment.post?.subName}
 										</Link>
