@@ -54,7 +54,7 @@ const PostCard = ({ post: { identifier, slug, title, body, subName, createdAt, v
 					{!isInSubPage && (
 						<div className="flex items-center">
 							<Link href={`/r/${subName}`}>
-								<Image src={sub!.imageUrl} alt="sub" className="w-6 h-6 mr-1 rounded-full cursor-pointer" />
+								<Image src={sub!.imageUrl} alt="sub" className="rounded-full cursor-pointer" width={12} height={12} />
 							</Link>
 							<Link href={`/r/${subName}`} className="text-xs font-bold cursor-pointer hover:underline">
 								/r/{subName}
