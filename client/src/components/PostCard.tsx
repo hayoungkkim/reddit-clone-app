@@ -15,7 +15,6 @@ interface PostCardProps {
 }
 
 const PostCard = ({ post: { identifier, slug, title, body, subName, createdAt, voteScore, userVote, commentCount, url, username, sub }, mutate, subMutate }: PostCardProps) => {
-	console.log(userVote);
 	const router = useRouter();
 	const isInSubPage = router.pathname === "/r/[sub]";
 

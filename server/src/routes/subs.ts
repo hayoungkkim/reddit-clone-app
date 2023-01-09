@@ -25,30 +25,6 @@ const getSub = async (req: Request, res: Response) => {
 
 		sub.posts = posts;
 
-		// if (res.locals.user) {
-		// 	sub.posts.forEach((p) => p.setUserVote(res.locals.user));
-		// }
-
-		return res.json(sub);
-	} catch (error) {
-		return res.status(404).json({ error: "커뮤니티를 찾을 수 없습니다." });
-	}
-};
-
-const getSub2 = async (req: Request, res: Response) => {
-	const name = req.params.name;
-	try {
-		const sub = await Sub.findOneByOrFail({ name });
-
-		// 포스트를 생성한 후에 해당 sub에 속하는 포스트 정보들을 넣어주기
-		const posts = await Post.find({
-			where: { subName: sub.name },
-			order: { createdAt: "DESC" },
-			relations: ["comments", "votes"],
-		});
-
-		sub.posts = posts;
-
 		if (res.locals.user) {
 			sub.posts.forEach((p) => p.setUserVote(res.locals.user));
 		}
@@ -124,7 +100,7 @@ const ownSub = async (req: Request, res: Response, next: NextFunction) => {
 		next();
 	} catch (error) {
 		console.log(error);
-		return res.status(500).json({ error: "문제가 발생했습니다." });
+		return res.status(500).json({ error: " 문제가 발생했습니다." });
 	}
 };
 
